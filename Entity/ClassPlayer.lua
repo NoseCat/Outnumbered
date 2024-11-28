@@ -1,6 +1,7 @@
 require('math.ClassVector')
 require('Entity.ClassEntity')
 require('Entity.EntityTypesStats')
+require('Mouse')
 
 -- local speed = 500 --acts as accel in accelerate and as velocity in move
 -- local maxSpeed = 500
@@ -10,6 +11,7 @@ Player = Entity:new()
 function Player:new()
     local newObj = Entity.new(self)
     newObj.type = 1
+    newObj.Mouse = Mouse:new()
     --newObj.health = 100
     --newObj.damage = 10
     --newObj.maxspeed = 5
@@ -32,6 +34,10 @@ function Player.getInput()
     if love.keyboard.isDown("d") then
         inputVec.x = inputVec.x + 1
     end
-    return inputVec
+    return inputVec:normalized()
+end
+
+function Player:updateMouse()
+    self.Mouse:update()
 end
 

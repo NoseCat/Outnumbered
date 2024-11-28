@@ -8,7 +8,7 @@ function Entity:new()
         type = 0,
         pos = Vector:new(0, 0),
         target = Vector:new(0, 0), --movement direction
-        vel = Vector:new(0, 0)
+        vel = Vector:new(0, 0),
     }
 
     self.__index = self
@@ -38,4 +38,12 @@ end
 function Entity:move_(dt)
     local dir = self.target - self.pos
     self.pos = self.pos + dir:normalized() * EntityTypes[self.type].velocity * dt
+end
+
+function Entity:getPos()
+    return self.pos
+end
+
+function Entity:getRadius()
+    return EntityTypes[self.type].radius
 end
